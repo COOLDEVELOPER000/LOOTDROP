@@ -34,7 +34,7 @@ Then deploy the sync function:
 cd lootdrop
 supabase login
 supabase link --project-ref zcrlfagdpjtungpodaqj
-supabase secrets set SUPABASE_SERVICE_ROLE_KEY=YOUR_SERVICE_ROLE_KEY
+supabase secrets set SERVICE_ROLE_KEY=YOUR_SERVICE_ROLE_KEY
 supabase functions deploy sync-games
 ```
 
