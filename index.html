@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LootDrop | Free Game Finder</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <div class="logo">LOOT<span>DROP</span></div>
+        <div class="nav-right">
+            <div class="search-wrap">
+                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                <input type="text" id="search-input" placeholder="Search games...">
+            </div>
+            <div class="platform-filters">
+                <button class="filter-btn active" data-platform="all">All</button>
+                <button class="filter-btn" data-platform="steam">Steam</button>
+                <button class="filter-btn" data-platform="epic">Epic</button>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- HERO: Limited Time Deals -->
+        <section class="hero-section" id="hero-section">
+            <div class="hero-label">
+                <span class="pulse-dot"></span>
+                100% OFF — LIMITED TIME
+            </div>
+            <div id="hero-content">
+                <div class="skeleton-hero"></div>
+            </div>
+        </section>
+
+        <!-- F2P GRID -->
+        <section class="f2p-section">
+            <div class="section-header">
+                <h2>Free To Play</h2>
+                <span id="game-count" class="game-count"></span>
+            </div>
+            <div class="grid-container" id="game-grid">
+                <!-- Skeleton loaders -->
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+            </div>
+            <div id="no-results" class="no-results hidden">
+                <p>No games match "<span id="search-term"></span>"</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>LootDrop — Updated every 6 hours. Data from Steam &amp; Epic Games.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
