@@ -527,3 +527,34 @@ footer {
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* ── Upcoming ("Free Soon") rail ── */
+.upcoming-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px 8px;
+}
+.upcoming-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 18px;
+}
+.game-card.upcoming {
+    opacity: 0.92;
+    border-style: dashed;
+}
+.game-card.upcoming:hover { opacity: 1; }
+.soon-badge {
+    background: rgba(255,70,85,0.12);
+    border: 1px solid rgba(255,70,85,0.3);
+    color: var(--red);
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+}
+@media (max-width: 640px) {
+    .upcoming-section { padding: 0 16px 8px; }
+    .upcoming-row { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
+}
