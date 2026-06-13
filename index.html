@@ -1,75 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LootDrop | Free Game Finder</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LootDrop · Free games before they're gone</title>
+  <meta name="description" content="Free-to-keep deals and free-to-play games from Steam and Epic — sorted by how fast they expire.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- NAV -->
-    <nav>
-        <div class="logo">LOOT<span>DROP</span></div>
-        <div class="nav-right">
-            <div class="search-wrap">
-                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-                <input type="text" id="search-input" placeholder="Search games...">
-            </div>
-            <div class="platform-filters">
-                <button class="filter-btn active" data-platform="all">All</button>
-                <button class="filter-btn" data-platform="steam">Steam</button>
-                <button class="filter-btn" data-platform="epic">Epic</button>
-            </div>
+  <header class="topbar">
+    <a class="logo" href="./">LOOT<span>DROP</span></a>
+    <div class="controls">
+      <label class="search">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="search" id="q" placeholder="Search games" autocomplete="off">
+      </label>
+      <div class="filters" role="tablist" aria-label="Platform">
+        <button class="filter is-active" data-platform="all">All</button>
+        <button class="filter" data-platform="steam">Steam</button>
+        <button class="filter" data-platform="epic">Epic</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Featured: the deal expiring soonest -->
+    <section class="hero" id="hero" hidden>
+      <div class="hero-inner" id="hero-inner"></div>
+    </section>
+
+    <!-- Live 100%-off deals -->
+    <section class="board" id="sec-now" hidden>
+      <div class="board-head">
+        <div class="board-titles">
+          <span class="eyebrow eyebrow--urgent"><i class="dot"></i>Claim now</span>
+          <p class="board-sub">100% off — yours to keep once you claim it</p>
         </div>
-    </nav>
+        <span class="count" id="count-now"></span>
+      </div>
+      <div class="grid" id="grid-now"></div>
+    </section>
 
-    <main>
-        <!-- HERO: Live 100% off limited deals -->
-        <section class="hero-section" id="hero-section">
-            <div class="hero-label">
-                <span class="pulse-dot"></span>
-                100% OFF — LIMITED TIME
-            </div>
-            <div id="hero-content">
-                <div class="skeleton-hero"></div>
-            </div>
-        </section>
+    <!-- Upcoming free games -->
+    <section class="board" id="sec-soon" hidden>
+      <div class="board-head">
+        <div class="board-titles">
+          <span class="eyebrow eyebrow--soon">Free soon</span>
+          <p class="board-sub">Going free at a set time — check back to claim</p>
+        </div>
+        <span class="count" id="count-soon"></span>
+      </div>
+      <div class="grid" id="grid-soon"></div>
+    </section>
 
-        <!-- UPCOMING: free soon (Epic's next rotation, announced ahead) -->
-        <section class="upcoming-section" id="upcoming-section" style="display:none">
-            <div class="section-header">
-                <h2>Free Soon</h2>
-            </div>
-            <div class="upcoming-row" id="upcoming-row"></div>
-        </section>
+    <!-- Always-free titles -->
+    <section class="board" id="sec-f2p" hidden>
+      <div class="board-head">
+        <div class="board-titles">
+          <span class="eyebrow eyebrow--free">Free to play</span>
+          <p class="board-sub">Always free, no time limit</p>
+        </div>
+        <span class="count" id="count-f2p"></span>
+      </div>
+      <div class="grid" id="grid-f2p"></div>
+    </section>
 
-        <!-- F2P GRID -->
-        <section class="f2p-section">
-            <div class="section-header">
-                <h2>Free To Play</h2>
-                <span id="game-count" class="game-count"></span>
-            </div>
-            <div class="grid-container" id="game-grid">
-                <div class="skeleton-card"></div>
-                <div class="skeleton-card"></div>
-                <div class="skeleton-card"></div>
-                <div class="skeleton-card"></div>
-                <div class="skeleton-card"></div>
-                <div class="skeleton-card"></div>
-            </div>
-            <div id="no-results" class="no-results hidden">
-                <p>No games match "<span id="search-term"></span>"</p>
-            </div>
-        </section>
-    </main>
+    <!-- States -->
+    <div class="state" id="loading">
+      <div class="grid">
+        <div class="skel"></div><div class="skel"></div><div class="skel"></div>
+        <div class="skel"></div><div class="skel"></div><div class="skel"></div>
+      </div>
+    </div>
+    <div class="state" id="empty" hidden></div>
+    <div class="state" id="error" hidden></div>
+  </main>
 
-    <footer>
-        <p>LootDrop — Updated hourly. Data from Steam &amp; Epic Games.</p>
-    </footer>
+  <footer>
+    <p>LootDrop · refreshed hourly from Steam &amp; Epic. Always confirm the price on the store page before claiming.</p>
+  </footer>
 
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
